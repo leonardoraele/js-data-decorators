@@ -4,10 +4,21 @@ export const nameMetadata = Symbol('shared-notes-models:name');
 export const schemaMetadata = Symbol('shared-notes-models:schema');
 export const relationsMetadata = Symbol('shared-notes-models:relations');
 
+export function getResourceName(constructor: Function): string
+{
+	return Reflect.getMetadata(nameMetadata, constructor);
+}
+
 export function Resource(name: string, schema?: object): ClassDecorator;
 export function Resource(schema?: object): ClassDecorator;
 export function Resource(_name?: any, _schema?: any): ClassDecorator
 {
+	if (typeof _name === 'object')
+	{
+		_schema = _name;
+		_name = undefined;
+	}
+
 	return function(constructor: Function): void
 	{
 		const schema =

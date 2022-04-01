@@ -1,7 +1,7 @@
 import { getJsonSchema } from '.';
 import mlstr from 'mlstr';
 import { schemaMetadata } from './resource';
-import Resource from './resource';
+import { Resource } from './resource';
 import pick from 'lodash.pick';
 
 interface BasePropertyOptions

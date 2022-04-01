@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "test": "mocha",
+    "test": "jest",
     "prepare": "ts-patch install -s"
   },
   "repository": {
@@ -42,10 +42,16 @@
   "devDependencies": {
     "@ovos-media/ts-transform-paths": "^1.7.18-1",
     "@types/inflection": "^1.13.0",
+    "@types/jest": "^27.4.1",
     "@types/lodash.camelcase": "^4.3.6",
     "@types/lodash.kebabcase": "^4.1.6",
     "@types/lodash.pick": "^4.4.6",
+    "@types/uuid": "^8.3.4",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0",
     "ts-patch": "^2.0.1",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "uuid": "^8.3.2"
   }
 }

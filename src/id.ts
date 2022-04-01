@@ -33,6 +33,11 @@ export function Id(): PropertyDecorator
 {
 	return function(prototype: object, key: string|symbol): void
 	{
+		if (getIdAttr(prototype.constructor))
+		{
+			throw new Error('Class must not have more than one @Id decorator.');
+		}
+
 		Reflect.defineMetadata(idMetadata, key, prototype.constructor);
 	};
 }
