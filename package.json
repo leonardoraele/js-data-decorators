@@ -1,0 +1,51 @@
+{
+  "name": "js-data-decorators",
+  "version": "0.1.0",
+  "description": "Addon to js-data that facilitates creation of schemas through the use of @Decorators",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "test": "mocha",
+    "prepare": "ts-patch install -s"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/leonardoraele/js-data-decorators.git"
+  },
+  "keywords": [
+    "js-data",
+    "data",
+    "decorator",
+    "decorators",
+    "orm",
+    "typescript"
+  ],
+  "author": "Leonardo Raele <leonardoraele@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leonardoraele/js-data-decorators/issues"
+  },
+  "homepage": "https://github.com/leonardoraele/js-data-decorators#readme",
+  "dependencies": {
+    "inflection": "^1.13.2",
+    "lodash.camelcase": "^4.3.0",
+    "lodash.kebabcase": "^4.1.1",
+    "lodash.pick": "^4.4.0",
+    "mlstr": "^1.0.3",
+    "throw2": "^1.0.1"
+  },
+  "peerDependencies": {
+    "js-data": "^3.0.11",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@ovos-media/ts-transform-paths": "^1.7.18-1",
+    "@types/inflection": "^1.13.0",
+    "@types/lodash.camelcase": "^4.3.6",
+    "@types/lodash.kebabcase": "^4.1.6",
+    "@types/lodash.pick": "^4.4.6",
+    "ts-patch": "^2.0.1",
+    "typescript": "^4.6.3"
+  }
+}
