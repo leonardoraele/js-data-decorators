@@ -35,3 +35,13 @@ export function Resource(_name?: any, _schema?: any): ClassDecorator
 		Reflect.defineMetadata(schemaMetadata, schema, constructor);
 	}
 }
+
+export function checkIsResource(object: Object): boolean;
+export function checkIsResource(type: Function): boolean;
+export function checkIsResource(subject: Object|Function): boolean
+{
+	const constructor = typeof subject === 'function'
+		? subject
+		: subject.constructor;
+	return Reflect.hasMetadata(nameMetadata, constructor);
+}

@@ -7,7 +7,6 @@ export interface HasManyOptions
 {
 	resource?: Function|string,
 	foreignKey?: string,
-	localField?: boolean,
 }
 
 export function HasMany(options: HasManyOptions = {}): PropertyDecorator

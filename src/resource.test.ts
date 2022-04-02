@@ -1,4 +1,4 @@
-import { Resource, getResourceName } from './resource';
+import { Resource, getResourceName, checkIsResource } from 'resource';
 
 describe(Resource.name, () =>
 {
@@ -16,5 +16,21 @@ describe(Resource.name, () =>
 		class MyResource {}
 
 		expect(getResourceName(MyResource)).toBe('my-resource');
+	});
+
+	test('checking if is resource', () =>
+	{
+		@Resource()
+		class TestResource {}
+
+		expect(checkIsResource(TestResource)).toBeTruthy();
+		expect(checkIsResource(new TestResource)).toBeTruthy();
+
+		// ---------------------------------------------------------------------
+
+		class NotResource {}
+
+		expect(checkIsResource(NotResource)).toBeFalsy();
+		expect(checkIsResource(new NotResource)).toBeFalsy();
 	});
 });

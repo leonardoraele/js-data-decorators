@@ -1,4 +1,4 @@
-import { Id, getId, setId, getIdAttr, getIdAttrOrThrow } from './id';
+import { Id, getId, setId, getIdAttr, getIdAttrOrThrow } from 'id';
 import { Resource } from './resource';
 import { v4 as uuid } from 'uuid';
 

@@ -1,29 +1,22 @@
-import { getMapperOpts, getJsonSchema } from './builder';
-import { Id } from './id';
-import { Resource } from './resource';
-import { Required } from './required';
-import { Property } from './property';
+import { getJsonSchema, getMapperOpts } from 'builder';
+import User from './builder.test/user.skip.test';
+import Article from './builder.test/article.skip.test';
 
 describe('builder', () =>
 {
-	// TODO Add relationships to the test resource
-	@Resource({ description: 'Resource for testing' })
-	class MyResource
-	{
-		@Id() @Property({ type: 'integer' }) id = 1;
-		@Property({ type: 'array' }) numbers = [1, 2, 3];
-		@Property({ type: 'boolean' }) @Required() isValid = true;
-		@Property({ type: 'integer' }) @Required() magicNumber = 1;
-		@Property({ type: 'number' }) @Required() pi = 3.14159265359;
-		@Property({ type: 'null' }) none = null;
-		@Property({ type: 'object' }) details = {};
-		@Property({ type: 'string' }) name = 'some item';
-		@Property({ type: ['integer', 'null'] }) maybeNumber = null as number|null;
-	}
-
 	test(getJsonSchema.name, () =>
 	{
-		expect(getJsonSchema(MyResource))
+		expect(getJsonSchema(User))
+			.toEqual(
+			{
+				type: 'object',
+				properties:
+				{
+					id: { type: 'string' },
+				},
+			});
+
+		expect(getJsonSchema(Article))
 			.toEqual(
 			{
 				description: 'Resource for testing',
@@ -31,29 +24,46 @@ describe('builder', () =>
 				properties:
 				{
 					id: { type: 'integer' },
-					numbers: { type: 'array' },
-					isValid: { type: 'boolean' },
-					magicNumber: { type: 'integer' },
-					pi: { type: 'number' },
-					none: { type: 'null' },
-					details: { type: 'object' },
-					name: { type: 'string' },
-					maybeNumber: { type: ['integer', 'null'] },
+					authorId: { type: ['string', 'null'] },
+					isPublished: { type: 'boolean' },
+					starRating: { type: 'number', minimum: 0, maximum: 5 },
+					tags: { type: 'array', items: { type: 'string' } },
 				},
-				required: ['isValid', 'magicNumber', 'pi'],
-			})
+			});
 	});
 
 	test(getMapperOpts.name, () =>
 	{
-		expect(getMapperOpts(MyResource))
+		expect(getMapperOpts(User))
 			.toEqual(
 			{
-				name: 'my-resource',
-				schema: getJsonSchema(MyResource),
-				relations: undefined,
+				name: 'user',
+				schema: getJsonSchema(User),
+				relations:
+				{
+					hasMany:
+					{
+						article: { foreignKey: 'authorId', localField: 'articles' },
+					},
+				},
 				idAttribute: 'id',
-				recordClass: MyResource,
+				recordClass: User,
+			});
+
+		expect(getMapperOpts(Article))
+			.toEqual(
+			{
+				name: 'article',
+				schema: getJsonSchema(Article),
+				relations:
+				{
+					belongsTo:
+					{
+						user: { foreignKey: 'authorId', localField: 'author' },
+					},
+				},
+				idAttribute: 'id',
+				recordClass: Article,
 			});
 	});
 });

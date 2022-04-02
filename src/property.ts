@@ -118,15 +118,6 @@ function deserializeMany<T extends Object>(type: new (attrs?: Partial<T>) => T, 
 
 function deserializeOne<T extends Object>(type: new (attrs?: Partial<T>) => T, data: Partial<T>): T
 {
-	return new type(data);
-}
-
-export function isSerializable(object: Object): boolean;
-export function isSerializable(type: Function): boolean;
-export function isSerializable(subject: Object|Function): boolean
-{
-	const constructor = typeof subject === 'function'
-		? subject
-		: subject.constructor;
-	return !!getJsonSchema(constructor);
+	// TODO Validate entity
+	return Object.assign(new type(), data);
 }

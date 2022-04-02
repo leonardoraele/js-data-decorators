@@ -1,8 +1,9 @@
-import { getResourceName, relationsMetadata, schemaMetadata } from "./resource";
-import { Mapper, Schema } from "js-data";
-import { idMetadata } from "./id";
+import { getResourceName, relationsMetadata, schemaMetadata } from './resource';
+import { Mapper, Schema } from 'js-data';
+import { idMetadata } from './id';
 
-export function getJsonSchema(constructor: Function): object|undefined
+// TODO Use an actual json-schema type definition for return type
+export function getJsonSchema(constructor: Function): any|undefined
 {
 	return Reflect.getMetadata(schemaMetadata, constructor);
 }
