@@ -1,6 +1,6 @@
 import kebabCase from 'lodash.kebabcase';
 import camelCase from 'lodash.camelcase';
-import { relationsMetadata } from './resource';
+import { RESOURCE_RELATIONS_METADATA } from './resource';
 
 export interface BelongsToOptions
 {
@@ -18,11 +18,11 @@ export function BelongsTo(options: BelongsToOptions = {}): PropertyDecorator
 		const foreignKey = options.foreignKey ?? camelCase(key.toString() + ' id');
 		const localField = key;
 
-		const relations = Reflect.getMetadata(relationsMetadata, prototype.constructor) ?? {};
+		const relations = Reflect.getMetadata(RESOURCE_RELATIONS_METADATA, prototype.constructor) ?? {};
 
 		relations.belongsTo ??= {};
 		relations.belongsTo[relatedResource] = { foreignKey, localField };
 
-		Reflect.defineMetadata(relationsMetadata, relations, prototype.constructor);
+		Reflect.defineMetadata(RESOURCE_RELATIONS_METADATA, relations, prototype.constructor);
 	}
 }

@@ -1,6 +1,6 @@
 import { getJsonSchema } from '.';
 import mlstr from 'mlstr';
-import { schemaMetadata } from './resource';
+import { RESOURCE_SCHEMA_METADATA } from './resource';
 import { Resource } from './resource';
 import pick from 'lodash.pick';
 
@@ -61,12 +61,12 @@ export function Property(options: PropertyOptions = {}): PropertyDecorator
 	return function(prototype: object, key: string|symbol): void
 	{
 		// options.type ??= Reflect.getMetadata('design:type', prototype, key);
-		const schema = Reflect.getMetadata(schemaMetadata, prototype.constructor) ?? {};
+		const schema = Reflect.getMetadata(RESOURCE_SCHEMA_METADATA, prototype.constructor) ?? {};
 
 		schema.properties ??= {};
 		schema.properties[key] = options;
 
-		Reflect.defineMetadata(schemaMetadata, schema, prototype.constructor);
+		Reflect.defineMetadata(RESOURCE_SCHEMA_METADATA, schema, prototype.constructor);
 	}
 }
 

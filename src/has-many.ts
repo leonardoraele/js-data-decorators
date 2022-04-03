@@ -1,7 +1,7 @@
 import kebabCase from 'lodash.kebabcase';
 import camelCase from 'lodash.camelcase';
 import { singularize } from 'inflection';
-import { relationsMetadata } from './resource';
+import { RESOURCE_RELATIONS_METADATA } from './resource';
 
 export interface HasManyOptions
 {
@@ -20,11 +20,11 @@ export function HasMany(options: HasManyOptions = {}): PropertyDecorator
 			: kebabCase(singularize(key.toString()));
 		const foreignKey = options.foreignKey ?? camelCase(prototype.constructor.name + ' id');
 		const localField = key;
-		const relations = Reflect.getMetadata(relationsMetadata, prototype.constructor) ?? {};
+		const relations = Reflect.getMetadata(RESOURCE_RELATIONS_METADATA, prototype.constructor) ?? {};
 
 		relations.hasMany ??= {};
 		relations.hasMany[relatedResource] = { foreignKey, localField };
 
-		Reflect.defineMetadata(relationsMetadata, relations, prototype.constructor);
+		Reflect.defineMetadata(RESOURCE_RELATIONS_METADATA, relations, prototype.constructor);
 	}
 }
