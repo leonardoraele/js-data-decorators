@@ -2,7 +2,7 @@
   "name": "js-data-decorators",
   "version": "0.1.0",
   "description": "Addon to js-data that facilitates creation of schemas through the use of @Decorators",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
