@@ -1,5 +1,5 @@
 import { getResourceName, RESOURCE_RELATIONS_METADATA, RESOURCE_SCHEMA_METADATA } from './resource';
-import { Mapper, Schema } from 'js-data';
+import { DataStore, Mapper, Schema } from 'js-data';
 import { idMetadata } from './id';
 
 // TODO Use an actual json-schema type definition for return type
@@ -25,4 +25,9 @@ export function getMapperOpts(constructor: Function): object
 export function createMapper(constructor: Function, mapperOptions: object): Mapper
 {
 	return new Mapper({ ...getMapperOpts(constructor), ...mapperOptions });
+}
+
+export function defineMapper(store: DataStore, constructor: Function, mapperOptions: object): Mapper
+{
+	return store.defineMapper(getResourceName(constructor), { ...getMapperOpts(constructor), ...mapperOptions });
 }
