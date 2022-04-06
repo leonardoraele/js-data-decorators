@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "description": "Addon to js-data that facilitates creation of schemas through the use of @Decorators",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "npm run clear && tsc",
     "build:watch": "tsc --watch",
+    "clear": "rm -rf dist",
     "test": "jest",
-    "prepare": "ts-patch install -s"
+    "prepare": "ts-patch install -s",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
