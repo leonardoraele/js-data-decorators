@@ -7,4 +7,3 @@ export * from './id';
 export * from './property';
 export * from './required';
 export * from './resource';
-export * from './validate';
